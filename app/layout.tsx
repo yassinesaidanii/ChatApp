@@ -11,8 +11,8 @@ import { QueryProvider } from "@/components/providers/query-provider";
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Discord Clone",
-  description: "Discord Clone created by @impruthvi",
+  title: "Saidani ChatApp",
+  description: "ChatApp created by @_criminal8",
 };
 
 export default function RootLayout({
