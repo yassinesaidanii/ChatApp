@@ -102,7 +102,11 @@ export const ChatItem: React.FC<ChatItemProps> = ({
     }
   };
 
-
+  useEffect(() => {
+    form.reset({
+      content,
+    });
+  }, [content]);
 
   const fileType = fileUrl?.split(".").pop();
 
