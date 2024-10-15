@@ -1,9 +1,10 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  publicRoutes: ["/api/uploadthing", "/api/socket/io"], // Make this route public
+  ignoredRoutes: ["/api/socket/io"], // Ignore this route from Clerk authentication
+  publicRoutes: ["/api/uploadthing"],
 });
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)", "/api/socket/io"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
