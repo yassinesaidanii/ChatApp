@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Server as NetServer } from "http";
+import { Server as NextServer } from "http";
 import { NextApiRequest } from "next";
-import { Server as ServerIo } from "socket.io";
-
+import { Server as SocketIOServer } from "socket.io";
 import { NextApiResponseServerIo } from "@/types";
 
 export const config = {
@@ -13,15 +11,19 @@ export const config = {
 
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
   if (!res.socket.server.io) {
+    console.log("*First use, starting socket.io");
     const path = "/api/socket/io";
-    const httpServer: NetServer = res.socket.server as any;
-    const io = new ServerIo(httpServer, {
-      path: path,
-      addTrailingSlash: false,
-    });
-    res.socket.server.io = io;
-  }
 
+    const httpServer: NextServer = res.socket.server as any;
+    const io = new SocketIOServer(httpServer, {
+      path: path,
+      // @ts-ignore
+    });
+
+    res.socket.server.io = io;
+  } else {
+    console.log("socket.io already running");
+  }
   res.end();
 };
 
