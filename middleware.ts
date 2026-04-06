@@ -1,6 +1,6 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { authMiddleware } from "@clerk/nextjs";
 
-export default clerkMiddleware({
+export default authMiddleware({
   publicRoutes: ["/api/uploadthing", "/api/socket/io"],
 });
 
@@ -9,6 +9,8 @@ export const config = {
     "/((?!.+\\.[\\w]+$|_next).*)",
     "/",
     "/(api|trpc)(.*)",
-    "/api/socket/io"
+    "/api/socket/io",
   ],
 };
+
+export const runtime = "nodejs"; // 🔥 THIS FIXES YOUR ERROR
